@@ -34,11 +34,11 @@ int is_leaf(const binary_tree_t *node)
 }
 
 /**
- * binary_tree_is_perfect - check if tree is perfect
+ * is_perfect - check if tree is perfect
  * @tree: root node
  * Return: 1 if perfect else 0
  */
-int binary_tree_is_perfect(const binary_tree_t *tree)
+int is_perfect(const binary_tree_t *tree)
 {
 	if (!tree)
 		return (0);
@@ -46,11 +46,24 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 		return (0);
 	if (tree->right == NULL && tree->left)
 		return (0);
-	if (binary_tree_height(tree->left)
-			!= binary_tree_height(tree->right))
-		return (0);
 	return (binary_tree_is_perfect(tree->left)
 			&& binary_tree_is_perfect(tree->right));
+
+}
+/**
+ * binary_tree_is_perfect - check if tree is perfect
+ * @tree: root node
+ * Return: 1 if perfect else 0
+ */
+int binary_tree_is_perfect(const binary_tree_t *tree)
+{
+	if (is_perfect(tree))
+	{
+		if (binary_tree_height(tree->left)
+				!= binary_tree_height(tree->right))
+			return (0);
+	}
+	return (0);
 
 }
 
