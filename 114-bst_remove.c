@@ -45,8 +45,6 @@ bst_t *successor(const bst_t *node)
 			prev->parent->left = NULL;
 		else if (prev->parent->right && prev == prev->parent->right)
 			prev->parent->right = NULL;
-		prev->left = NULL;
-		prev->right = NULL;
 		return (prev);
 	}
 	while (next)
@@ -63,8 +61,6 @@ bst_t *successor(const bst_t *node)
 		prev->parent->left = NULL;
 	else if (prev->parent->right && prev == prev->parent->right)
 		prev->parent->right = NULL;
-	prev->left = NULL;
-	prev->right = NULL;
 	return (prev);
 }
 /**
@@ -82,6 +78,8 @@ bst_t *bst_remove(bst_t *root, int value)
 	if (Node == NULL || !Repl)
 		return (root);
 	Repl->parent = Node->parent;
+	Repl->left = NULL;
+	Repl->right = NULL;
 	if (Node->parent)
 	{
 		if (Repl != Node->left)
