@@ -20,48 +20,21 @@ bst_t *bst_search(const bst_t *tree, int value)
  * @node: node whose inorder successor required
  * Return: next successor
  */
-bst_t *successor(const bst_t *node)
+bst_t *successor(bst_t *node)
 {
-	bst_t *prev, *next;
 
+	bst_t *right;
 	if (!node)
 		return (NULL);
-	prev = (bst_t *)node;
-	next = prev->right;
-	if (!next)
+	right = node->right;
+	while (right && right->left)
+		right = right->left;
+	if (right)
 	{
-		next = prev->left;
-		while (next)
-		{
-			prev = next;
-			next = next->right;
-		}
-		if (prev == node)
-		{
-			free((bst_t *)node);
-			return (NULL);
-		}
-		if (prev->parent->left && prev == prev->parent->left)
-			prev->parent->left = NULL;
-		else if (prev->parent->right && prev == prev->parent->right)
-			prev->parent->right = NULL;
-		return (prev);
+		right->parent->left = NULL;
+		return (right);
 	}
-	while (next)
-	{
-		prev = next;
-		next = next->left;
-	}
-	if (prev == node)
-	{
-		free((bst_t *)node);
-		return (NULL);
-	}
-	if (prev->parent->left && prev == prev->parent->left)
-		prev->parent->left = NULL;
-	else if (prev->parent->right && prev == prev->parent->right)
-		prev->parent->right = NULL;
-	return (prev);
+	return (node->left);
 }
 /**
  * bst_remove - remove node
