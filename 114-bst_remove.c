@@ -22,8 +22,8 @@ bst_t *bst_search(const bst_t *tree, int value)
  */
 bst_t *successor(bst_t *node)
 {
-
 	bst_t *right;
+
 	if (!node)
 		return (NULL);
 	right = node->right;
