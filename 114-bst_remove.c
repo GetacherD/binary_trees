@@ -76,7 +76,7 @@ bst_t *bst_remove(bst_t *root, int value)
 	Node = bst_search(root, value);
 	Repl = successor(Node);
 	if (Node == NULL || !Repl)
-		return (root);
+		return (NULL);
 	Repl->parent = Node->parent;
 	Repl->left = NULL;
 	Repl->right = NULL;
